@@ -107,6 +107,8 @@ http://localhost にアクセスできるか確認
 
 docker-compose down
 
+## ER図
+![fix](https://github.com/user-attachments/assets/e74b1871-545c-428e-a1a7-344c1f2caad4)
 
 ### 主なコマンド一覧
 
