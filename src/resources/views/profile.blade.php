@@ -44,7 +44,7 @@
                 <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->title }}">
             </div>
             <p class="item-name">{{ $item->title }}</p>
-            @if ($item->status == 'sold')
+            @if ($item->sales_status == 'sold')
             <p class="item-status">Sold</p>
             @endif
         </a>

@@ -16,6 +16,6 @@ class CommentController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->back()->with('status', 'コメントを投稿しました！');
+        return redirect()->back();
     }
 }

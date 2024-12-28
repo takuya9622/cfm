@@ -26,9 +26,9 @@
         <div class="form-group">
             <h3 for="category" class="form-label">カテゴリー</h3>
             <div class="categories">
-                @foreach($categories as $id => $name)
-                <input hidden type="checkbox" name="category[]" id="category_{{ $id }}" value="{{ $id }}" {{ old('category') && in_array($id, old('category')) ? 'checked' : '' }}>
-                <label class="category-label" for="category_{{ $id }}">
+                @foreach($categories as $category => $name)
+                <input hidden type="checkbox" name="category[]" id="category_{{ $category }}" value="{{ $category }}" {{ old('category') && in_array($category, old('category')) ? 'checked' : '' }}>
+                <label class="category-label" for="category_{{ $category }}">
                     <span>{{ $name }}</span>
                 </label>
                 @endforeach

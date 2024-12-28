@@ -36,28 +36,28 @@
 
             <div class="form-group">
                 <label for="name">ユーザー名</label>
-                <input id="name" type="text" name="name" value="{{ $profile->name }}" required autofocus>
+                <input id="name" type="text" name="name" value="{{ old('name') ?? $profile->name }}" required autofocus>
                 @error('name')
                 <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="postal_code">郵便番号</label>
-                <input id="postal_code" type="text" name="postal_code" value="{{ $profile->postal_code }}">
+                <input id="postal_code" type="text" name="postal_code" value="{{ old('postal_code') ?? $profile->postal_code }}">
                 @error('postal_code')
                 <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="address">住所</label>
-                <input id="address" type="text" name="address" value="{{ $profile->address }}">
+                <input id="address" type="text" name="address" value="{{ old('address') ?? $profile->address }}">
                 @error('address')
                 <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="building">建物名</label>
-                <input id="building" type="text" name="building" value="{{ $profile->building }}">
+                <input id="building" type="text" name="building" value="{{ old('building') ?? $profile->building }}">
                 @error('building')
                 <div class="error">{{ $message }}</div>
                 @enderror

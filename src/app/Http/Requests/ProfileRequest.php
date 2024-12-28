@@ -13,10 +13,8 @@ class ProfileRequest extends FormRequest
 
     public function rules() {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required'],
             'postal_code' => ['nullable', 'regex:/^\d+-\d+$/', 'size:8'],
-            'address' => ['nullable', 'string', 'max:255'],
-            'building' => ['nullable', 'string', 'max:255'],
             'profile_image' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
         ];
     }

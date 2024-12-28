@@ -127,13 +127,11 @@ class OrderController extends Controller
 
         session()->forget('shipping_address');
 
-        return redirect()->route('profile.index', ['tab' => 'buy'])
-            ->with('status', '購入が完了しました！');
+        return redirect()->route('profile.index', ['tab' => 'buy']);
     }
 
     public function cancel()
     {
-        return redirect()->route('profile.index', ['tab' => 'buy'])
-            ->with('status', '購入がキャンセルされました。');
+        return redirect()->route('profile.index', ['tab' => 'buy']);
     }
 }

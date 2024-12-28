@@ -18,16 +18,16 @@ class PurchaseRequest extends FormRequest
             return [
                 'payment_method' => ['required'],
                 'postal_code' => ['required', 'regex:/^\d+-\d+$/', 'size:8'],
-                'address' => ['required', 'string', 'max:255'],
-                'building' => ['nullable', 'string', 'max:255'],
+                'address' => ['required'],
+                'building' => ['required'],
             ];
         }
 
         return [
             'payment_method' => ['required'],
             'postal_code' => ['required', 'regex:/^\d+-\d+$/', 'size:8'],
-            'address' => ['required', 'string', 'max:255'],
-            'building' => ['required', 'string', 'max:255'],
+            'address' => ['required'],
+            'building' => ['required'],
         ];
     }
 
