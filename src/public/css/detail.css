@@ -1,4 +1,4 @@
-.item_detail-container {
+.item-detail-container {
     display: flex;
     justify-content: flex-start;
     max-width: 1400px;
@@ -38,12 +38,12 @@
     padding: 30px;
 }
 
-.item-info_title {
+.item-info-title {
     font-size: 45px;
     margin: 0 auto;
 }
 
-.brand_name {
+.brand-name {
     margin: 0 auto;
     font-size: 20px;
 }
@@ -243,7 +243,7 @@
 }
 
 @media (max-width:850px) {
-    .item_detail-container {
+    .item-detail-container {
         padding: 15px;
     }
 

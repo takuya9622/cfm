@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="item_detail-container">
+<div class="item-detail-container">
     <div class="item-image">
         <img src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->name }}">
         @if (!$isAvailable)
@@ -15,9 +15,9 @@
     </div>
 
     <div class="item-info">
-        <h1 class="item-info_title">{{ $item->title }}</h1>
+        <h1 class="item-info-title">{{ $item->title }}</h1>
 
-        <p class="brand_name">
+        <p class="brand-name">
             @if($item->brand_name)
             {{ $item->brand_name }}
             @endif
@@ -29,14 +29,14 @@
             <form action="{{ route('likes.toggle', $item->id) }}" method="POST" class="like-form">
                 @csrf
                 <button type="submit" class="like-button">
-                    <span class="material-icons like-icon">
+                    <span class="material-icons">
                         {{ $isLiked ? 'star' : 'star_border' }}
                     </span>
                     <span class="like-count">{{ $item->likes_count }}</span>
                 </button>
             </form>
             <a href="#comments" class="comment-count">
-                <span class="material-icons comment-icon">chat_bubble_outline</span>
+                <span class="material-icons">chat_bubble_outline</span>
                 {{ $item->comments_count }}
             </a>
         </div>
