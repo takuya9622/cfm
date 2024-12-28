@@ -43,7 +43,7 @@
 | phpMyAdmin            | 5.2.1      |
 | nginx                 | 1.21.1     |
 | MailHog               |            |
-|Stripe API             |            |
+| Stripe API            |            |
 
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
@@ -57,31 +57,42 @@
 
 以下のコマンドでリポジトリをクローン
 
-```git clone https://github.com/takuya9622/cfm.git```
+```
+git clone https://github.com/takuya9622/cfm.git
+```
 
 必要であれば以下のコマンドでリモートリポジトリに紐づけ
 
-```cd cfm```<br />
-```git remote set-url origin <作成したリポジトリのurl>```<br />
-```git add .```<br />
-```git commit -m "リモートリポジトリの変更"```<br />
-```git push origin main```<br />
+```
+cd cfm
+git remote set-url origin <作成したリポジトリのurl>
+git add .
+git commit -m "リモートリポジトリの変更"
+git push origin main
+```
 
 エラーが出るようであれば以下のコマンドを実行後に再度コマンドを実行
 
-```sudo chmod -R 777 src/*```
+```
+sudo chmod -R 777 src/*
+```
 
 ### Dockerコンテナの作成
 
 以下のコマンドでdockerコンテナを作成
 
+```
 docker-compose up -d --build
+```
 
 ### 環境変数の設定
 
 以下を参考に.envファイルを作成
 
-```cp .env.example .env```
+```
+cd src
+cp .env.example .env
+```
 
 必要に応じてAPP_NAMEを変更 <br />
 APP_NAME=COACHTECH-FLEAMARKET <br />
@@ -108,31 +119,12 @@ STRIPE_SECRET=sk_test_example <br />
 
 ### パッケージのインストール
 
-④phpコンテナに移動し以下のコマンドを実行
+phpコンテナに移動し以下のコマンドを実行
 
-```composer install```
-
-```php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
 ```
-
-```php artisan key:generate```
-
-### 動作確認
-
-http://localhost にアクセスできるか確認<br />
-アクセスできたらnginxはOK
-<br />
-<br />
-http://localhost/login にアクセスできるか確認<br />
-アクセス出来たらLaravel,FortifyはOK
-<br />
-<br />
-http://localhost:8080 にアクセスできるか確認<br />
-アクセス出来たらphpMyAdminはOK
-<br />
-<br />
-http://localhost:8025 にアクセスできるか確認<br />
-アクセス出来たらMailHogはOK
+composer install
+php artisan key:generate
+```
 
 ### マイグレーションの実行
 
@@ -148,19 +140,46 @@ http://localhost:8025 にアクセスできるか確認<br />
 
 確認出来たら以下のコマンドでマイグレーションを実行
 
-```php artisan migrate```
+```
+php artisan migrate
+```
+
+もしエラーが出た場合は以下のコマンドでリトライ
+
+```
+php artisan migrate:fresh
+```
 
 必要に応じて以下のコマンドでシーディングを実行
 
-```php artisan db:seed```
+```
+php artisan db:seed
+```
 
+うまく行かない場合は以下のコマンドを実行後に再度マイグレーション
 
-### 主なコマンド一覧
+```
+composer dump-autoload
+```
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
+
+## URL
+
+・開発環境 : http://localhost<br />
+・phpMyAdmin : http://localhost:8080<br />
+・MailHog : http://localhost:8025<br />
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
+
+## 主なコマンド一覧
 
 | コマンド                                                                               | 実行する処理                           |
 | -------------------------------------------------------------------------------------- | -------------------------------------- |
-| composer create-project --prefer-dist laravel/laravel                                  | Laravel をインストール                 |
-| composer require laravel/fortify                                                       | Laravel Fortify をインストール         |
+| composer create-project --prefer-dist laravel/laravel                                  | Laravelをインストール                 |
+| composer require laravel/fortify                                                       | Laravel Fortifyをインストール         |
+| php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"　　　　　| Laravel Fortifyのカスタムの準備 |
+|composer require stripe/stripe-php 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　| Stripeのパッケージをインストール|
 | docker-compose up -d --build                                                           | コンテナの起動                         |
 | docker-compose down                                                                    | コンテナの停止                         |
 | docker-compose exec php bash                                                           | php コンテナに入る                     |
@@ -173,14 +192,11 @@ http://localhost:8025 にアクセスできるか確認<br />
 | php artisan make:model Contact                                                         | モデルファイルを作成                   |
 | php artisan make:controller ContactController                                          | コントローラーファイルを作成           |
 | php artisan make:request ContactRequest                                                | リクエストファイルを作成               |
-|php artisan storage:link　　　　　　　　　　　　　　　　　|ストレージディレクトリのシンボリックリンクを作成|
+|php artisan storage:link　　　　　　　　　　　　　　　　　                                 |ストレージディレクトリのシンボリックリンクを作成|
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## ER図
-![alt][def]
+![alt](er.png)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
-
-
-[def]: er.png
