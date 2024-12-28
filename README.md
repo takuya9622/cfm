@@ -252,6 +252,6 @@ composer dump-autoload
 
 [コーディング規約]:https://estra-inc.notion.site/1263a94a2aab4e3ab81bad77db1cf186?pvs=4
 
-[開発プロセス]:(https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=950806051#gid=950806051)
+[開発プロセス]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=950806051#gid=950806051
 
 [画面設計]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=1998718085#gid=1998718085
