@@ -6,14 +6,11 @@
 
 <p style="display: inline">
 
-  <!-- バックエンドのフレームワーク一覧 -->
   <img src="https://img.shields.io/badge/-Laravel-171923.svg?logo=laravel&style=for-the-badge">
   <img src="https://img.shields.io/badge/-Php-777BB4.svg?logo=php&logoColor=FFF&style=for-the-badge">
   <img src="https://img.shields.io/badge/-Nginx-269539.svg?logo=nginx&style=for-the-badge">
-  <!-- データベース関連 -->
   <img src="https://img.shields.io/badge/-MySQL-4479A1.svg?logo=mysql&style=for-the-badge&logoColor=white">
   <img src="https://img.shields.io/badge/-phpmyadmin-6C78AF.svg?logo=phpmyadmin&style=for-the-badge&logoColor=white">
-  <!-- インフラ一覧 -->
   <img src="https://img.shields.io/badge/-Docker-1488C6.svg?logo=docker&style=for-the-badge">
   <img src="https://img.shields.io/badge/-github-010409.svg?logo=github&style=for-the-badge">
   <img src="https://img.shields.io/badge/-Stripe-635bff.svg?logo=stripe&logoColor=FFF&style=for-the-badge">
@@ -25,6 +22,8 @@
 
 1. [環境](#環境)
 2. [開発環境構築](#開発環境構築)
+3. [URL](#URL)
+4. [主なコマンド一覧](#主なコマンド一覧)
 3. [ER図](#ER図)
 
 <br />
@@ -94,28 +93,31 @@ cd src
 cp .env.example .env
 ```
 
-必要に応じてAPP_NAMEを変更 <br />
-APP_NAME=COACHTECH-FLEAMARKET <br />
+必要に応じてAPP_NAMEを変更
+```
+APP_NAME=COACHTECH-FLEAMARKET
 
-DB_CONNECTION=mysql <br />
-DB_HOST=mysql <br />
-DB_PORT=3306 <br />
-DB_DATABASE=laravel_db <br />
-DB_USERNAME=laravel_user <br />
-DB_PASSWORD=laravel_pass <br />
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel_db
+DB_USERNAME=laravel_user
+DB_PASSWORD=laravel_pass
 
-MAIL_MAILER=smtp <br />
-MAIL_HOST=mailhog <br />
-MAIL_PORT=1025 <br />
-MAIL_USERNAME=null <br />
-MAIL_PASSWORD=null <br />
-MAIL_ENCRYPTION=null <br />
-MAIL_FROM_ADDRESS=test@example.com <br />
-MAIL_FROM_NAME="${APP_NAME}" <br />
-
-必要に応じてstripe APIキーを取得 <br />
-STRIPE_KEY=pk_test_example <br />
-STRIPE_SECRET=sk_test_example <br />
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=test@example.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+必要に応じてstripe APIキーを取得
+```
+STRIPE_KEY=pk_test_example
+STRIPE_SECRET=sk_test_example
+```
 
 ### パッケージのインストール
 
@@ -184,14 +186,14 @@ composer dump-autoload
 | docker-compose down                                                                    | コンテナの停止                         |
 | docker-compose exec php bash                                                           | php コンテナに入る                     |
 | php artisan key:generate                                                               | 暗号化キーを生成                     |
-| php artisan make:migration create_contacts_table                                       | マイグレーションファイルを作成         |
-| php artisan make:seeder ContactsSeeder                                                 | シーダーファイルを作成                 |
-| php artisan make:factory ContactFactory                                                | ファクトリーファイルを作成             |
+| php artisan make:migration create_items_table                                       | マイグレーションファイルを作成         |
+| php artisan make:seeder ItemSeeder                                                 | シーダーファイルを作成                 |
+| php artisan make:factory ItemFactory                                                | ファクトリーファイルを作成             |
 | php artisan migrate                                                                    | マイグレーションを行う                 |
 | php artisan db:seed                                                                    | シーディングを行う                     |
-| php artisan make:model Contact                                                         | モデルファイルを作成                   |
-| php artisan make:controller ContactController                                          | コントローラーファイルを作成           |
-| php artisan make:request ContactRequest                                                | リクエストファイルを作成               |
+| php artisan make:model Item                                                         | モデルファイルを作成                   |
+| php artisan make:controller ItemController                                          | コントローラーファイルを作成           |
+| php artisan make:request PurchaseRequest                                                | リクエストファイルを作成               |
 |php artisan storage:link　　　　　　　　　　　　　　　　　                                 |ストレージディレクトリのシンボリックリンクを作成|
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
