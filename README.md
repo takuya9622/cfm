@@ -20,16 +20,60 @@
 
 ## 目次
 
-1. [環境](#環境)
-2. [開発環境構築](#開発環境構築)
-3. [URL](#URL)
-4. [主なコマンド一覧](#主なコマンド一覧)
-3. [ER図](#ER図)
+1. [プロジェクト概要](#プロジェクト概要)
+2. [環境](#環境)
+3. [開発環境構築](#開発環境構築)
+4. [URL](#URL)
+5. [主なコマンド一覧](#主なコマンド一覧)
+6. [ER図](#ER図)
 
 <br />
 
+## プロジェクト概要
 
 
+### Webサービス制作の概要・方針決定
+
+| 項目           | 内容                              |
+|----------------|-----------------------------------|
+| サービス名      | coachtechフリマ                   |
+| サービス概要    | ある企業が開発した独自のフリマアプリ |
+| 制作の背景と目的 | アイテムの出品と購入を行うためのフリマアプリを開発する |
+| 制作の目標      | 初年度でのユーザー数1000人達成   |
+| 作業範囲        | 設計、コーディング、テスト       |
+| 納品方法        | GitHubでのリポジトリ共有         |
+
+---
+
+### サイト要件一覧
+
+| 項目                 | 内容                                      |
+|----------------------|-------------------------------------------|
+| ターゲットユーザー   | 10~30代の社会人                          |
+| ターゲットブラウザ・OS | PC：Chrome/Firefox/Safari 最新バージョン |
+---
+
+### システム要件一覧
+
+#### 機能要件一覧
+- [機能要件]を参照
+
+#### 非機能要件一覧
+| 項目                 | 内容                                      |
+|----------------------|-------------------------------------------|
+| 運用・保守について   | クライアントが運用・保守を行う            |
+| リリースについて     | 4ヶ月後を予定                            |
+| セキュリティについて | アプリケーション内に限り考慮する          |
+| SEOについて          | 考慮しない                                |
+| コード品質について   | [コーディング規約]を参照してコーディングを行うこと<br>その他の要件については、[開発プロセス]を参照 |
+
+#### デザイン要件
+- UIデザインについて: [画面設計]を参照
+
+#### テスト計画
+- テスト項目について: [開発プロセス]を参照
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## 環境
 
@@ -195,6 +239,7 @@ composer dump-autoload
 | php artisan make:controller ItemController                                          | コントローラーファイルを作成           |
 | php artisan make:request PurchaseRequest                                                | リクエストファイルを作成               |
 |php artisan storage:link　　　　　　　　　　　　　　　　　                                 |ストレージディレクトリのシンボリックリンクを作成|
+| php artisan test tests/Feature| 機能テストを実行|
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
@@ -202,3 +247,11 @@ composer dump-autoload
 ![alt](er.png)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
+
+[機能要件]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=1909938334#gid=1909938334
+
+[コーディング規約]:https://estra-inc.notion.site/1263a94a2aab4e3ab81bad77db1cf186?pvs=4
+
+[開発プロセス]:(https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=950806051#gid=950806051)
+
+[画面設計]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=1998718085#gid=1998718085
