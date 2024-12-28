@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="exhibition-container">
     <h1>商品の出品</h1>
 
     <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data" class="sell-form" novalidate>
