@@ -15,8 +15,8 @@ class LoginRequest extends FortifyLoginRequest
     public function rules(): array
     {
         return [
-            'email' => ['required'],
-            'password' =>  ['required'],
+            'email' => ['required', 'email'],
+            'password' =>  ['required', 'min:8'],
         ];
     }
 
@@ -24,7 +24,9 @@ class LoginRequest extends FortifyLoginRequest
     {
         return [
             'email.required' => 'メールアドレスを入力してください',
+            'email.email' => '有効なメールアドレスを入力してください',
             'password.required' => 'パスワードを入力してください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
         ];
     }
 
