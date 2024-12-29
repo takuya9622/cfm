@@ -24,8 +24,9 @@
 2. [環境](#環境)
 3. [開発環境構築](#開発環境構築)
 4. [URL](#URL)
-5. [主なコマンド一覧](#主なコマンド一覧)
-6. [ER図](#ER図)
+5. [機能テスト](#機能テスト)
+6. [主なコマンド一覧](#主なコマンド一覧)
+7. [ER図](#ER図)
 
 <br />
 
@@ -130,7 +131,7 @@ docker-compose up -d --build
 
 ### 環境変数の設定
 
-以下を参考に.envファイルを作成
+以下を参考に.envを作成
 
 ```
 cd src
@@ -218,14 +219,40 @@ composer dump-autoload
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
+## 機能テスト
+
+以下を参考に.env.testingを作成
+```
+cp .env .env.testing
+```
+DBの部分を以下のように変更
+```
+-DB_CONNECTION=mysql
+-DB_HOST=mysql
+-DB_PORT=3306
+-DB_DATABASE=laravel_db
+-DB_USERNAME=laravel_user
+-DB_PASSWORD=laravel_pass
+
++DB_CONNECTION=sqlite
++DB_DATABASE=:memory:
+```
+以下のコマンドでテストを実行
+```
+docker-compose exec php bash
+php artisan test tests/Feature
+```
+
+<p align="right">(<a href="#top">トップへ</a>)</p>
+
 ## 主なコマンド一覧
 
 | コマンド                                                                               | 実行する処理                           |
 | -------------------------------------------------------------------------------------- | -------------------------------------- |
 | composer create-project --prefer-dist laravel/laravel                                  | Laravelをインストール                 |
 | composer require laravel/fortify                                                       | Laravel Fortifyをインストール         |
-| php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"　　　　　| Laravel Fortifyのカスタムの準備 |
-|composer require stripe/stripe-php 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　| Stripeのパッケージをインストール|
+| php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"         | Laravel Fortifyのカスタムの準備 |
+|composer require stripe/stripe-php                                                      | Stripeのパッケージをインストール|
 | docker-compose up -d --build                                                           | コンテナの起動                         |
 | docker-compose down                                                                    | コンテナの停止                         |
 | docker-compose exec php bash                                                           | php コンテナに入る                     |
@@ -238,7 +265,7 @@ composer dump-autoload
 | php artisan make:model Item                                                         | モデルファイルを作成                   |
 | php artisan make:controller ItemController                                          | コントローラーファイルを作成           |
 | php artisan make:request PurchaseRequest                                                | リクエストファイルを作成               |
-|php artisan storage:link　　　　　　　　　　　　　　　　　                                 |ストレージディレクトリのシンボリックリンクを作成|
+|php artisan storage:link                                                            |ストレージディレクトリのシンボリックリンクを作成|
 | php artisan test tests/Feature| 機能テストを実行|
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
