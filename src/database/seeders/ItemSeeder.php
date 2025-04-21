@@ -86,7 +86,6 @@ class ItemSeeder extends Seeder
             ],
         ];
 
-        // testUser1 に 1~5
         foreach (range(0, 4) as $i) {
             Item::factory()->state(function (array $attributes) use ($testUser1, $presetItems, $i) {
                 return array_merge($attributes, [
@@ -95,7 +94,6 @@ class ItemSeeder extends Seeder
             })->create();
         }
 
-        // testUser2 に 6~10
         foreach (range(5, 9) as $i) {
             Item::factory()->state(function (array $attributes) use ($testUser2, $presetItems, $i) {
                 return array_merge($attributes, [
