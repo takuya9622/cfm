@@ -9,7 +9,7 @@ class ItemFactory extends Factory
 {
     public function definition()
     {
-        $presetItem = [
+        $presetItems = [
             [
                 'title' => '腕時計',
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
@@ -82,10 +82,9 @@ class ItemFactory extends Factory
             ],
         ];
 
-        $selected = $this->faker->randomElement($presetItem);
+        $selected = $this->faker->randomElement($presetItems);
 
         return array_merge($selected, [
-            'seller_id' => User::inRandomOrder()->value('id'),
             'brand_name' => $this->faker->optional()->company,
             'status' => $this->faker->randomElement([1, 2]),
             'created_at' => now(),

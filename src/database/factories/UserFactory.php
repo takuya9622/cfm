@@ -17,8 +17,33 @@ class UserFactory extends Factory
             'postal_code' => $this->faker->optional()->postcode(),
             'address' => $this->faker->optional()->address(),
             'building' => $this->faker->optional()->secondaryAddress,
+            'email_verified_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ];
+    }
+
+    public function testUser1()
+    {
+        return $this->state([
+            'name' => 'test_user1',
+            'email' => 'testUser1@example.com',
+        ]);
+    }
+
+    public function testUser2()
+    {
+        return $this->state([
+            'name' => 'test_user2',
+            'email' => 'testUser2@example.com',
+        ]);
+    }
+
+    public function testUser3()
+    {
+        return $this->state([
+            'name' => 'test_user3',
+            'email' => 'testUser3@example.com',
+        ]);
     }
 }
