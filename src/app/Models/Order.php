@@ -29,4 +29,14 @@ class Order extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    public function chats()
+    {
+        return $this->hasMany(OrderChat::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(OrderReview::class);
+    }
 }
