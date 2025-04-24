@@ -110,18 +110,19 @@ class OrderController extends Controller
         $metadata = $session->metadata;
         $itemId = $metadata->item_id;
         $user = auth()->user();
-        // $validated = session('shipping_address');
 
         DB::transaction(function () use ($itemId, $user, $metadata) {
+            $item = Item::findOrFail($itemId);
             Order::create([
                 'item_id' => $itemId,
                 'buyer_id' => $user->id,
+                'seller_id' => $item->seller_id,
                 'shipping_postal_code' => $metadata->postal_code ?? $user->postal_code,
                 'shipping_address' => $metadata->address ?? $user->address,
                 'shipping_building' => $metadata->building ?? $user->building,
             ]);
 
-            item::where('id', $itemId)->update(['status' => 2]);
+            $item->update(['status' => 2]);
         });
 
 

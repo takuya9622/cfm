@@ -9,12 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'item_id',
         'buyer_id',
-        'name',
+        'seller_id',
+        'status',
         'shipping_postal_code',
         'shipping_address',
         'shipping_building',
@@ -25,18 +24,36 @@ class Order extends Model
         return $this->belongsTo(User::class, 'buyer_id');
     }
 
-    public function product()
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
+    public function item()
     {
         return $this->belongsTo(Item::class);
     }
 
     public function chats()
     {
-        return $this->hasMany(OrderChat::class);
+        return $this->hasMany(Chat::class);
     }
 
     public function reviews()
     {
-        return $this->hasMany(OrderReview::class);
+        return $this->hasMany(Review::class);
+    }
+
+    public const STATUS_DEALING = 0;
+    public const STATUS_COMPLETED = 1;
+
+    public const DEALS_STATUSES = [
+        self::STATUS_DEALING => '取引中',
+        self::STATUS_COMPLETED => '取引完了',
+    ];
+
+    public function getDealsStatusAttribute()
+    {
+        return self::DEALS_STATUSES[$this->status] ?? '不明';
     }
 }

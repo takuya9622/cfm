@@ -3,6 +3,8 @@ html body main {
     font-family: 'Inter', 'Noto Sans JP', Arial, sans-serif;
     background-color: #fff;
     color: #000;
+    overflow: auto;
+    height: 100%;
 }
 
 .error {

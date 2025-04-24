@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Http\Requests\ProfileRequest;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -14,25 +15,50 @@ class UserController extends Controller
 
         $query = Item::query();
 
-        if ($tab === 'sell') {
-            $query->whereIn('id', function ($query) {
-                $query->select('id')
-                    ->from('items')
-                    ->where('seller_id', auth()->id());
-            });
+        switch ($tab) {
+            case 'sell':
+            default:
+                $query->where('seller_id', auth()->id());
+                break;
+
+
+            case 'buy':
+                $query->whereIn('id', function ($query) {
+                    $query->select('item_id')
+                        ->from('orders')
+                        ->where('buyer_id', auth()->id());
+                });
+                break;
+
+            case 'dealing':
+                $query->whereIn('id', function ($subQuery) {
+                    $subQuery->select('item_id')
+                        ->from('orders')
+                        ->where(function ($q) {
+                            $q->where('buyer_id', auth()->id())
+                                ->orWhere('seller_id', auth()->id());
+                        });
+                });
+                break;
         }
+        $items = $query->with([
+            'orders.chats' => function ($query) {
+                $query->where('is_read', false);
+        }])->get();
 
-        if ($tab === 'buy') {
-            $query->whereIn('id', function ($query) {
-                $query->select('item_id')
-                    ->from('orders')
-                    ->where('buyer_id', auth()->id());
-            });
-        }
+        $unreadCount = Order::where('status', 0)
+            ->where(function ($q) {
+                $q->where('buyer_id', auth()->id())
+                    ->orWhere('seller_id', auth()->id());
+            })
+            ->with(['chats' => function ($query) {
+                $query->where('user_id', '!=', auth()->id())
+                        ->where('is_read', false);
+            }])
+            ->get()
+            ->sum(fn($order) => $order->chats->count());
 
-        $items = $query->get();
-
-        return view('profile', compact('items', 'tab'));
+        return view('profile', compact('items', 'tab', 'unreadCount'));
     }
 
     public function editProfile() {
@@ -42,6 +68,7 @@ class UserController extends Controller
     }
 
     public function updateProfile(ProfileRequest $request) {
+        /** @var \App\Models\User $user */
         $user = auth()->user();
 
         if ($request->hasFile('profile_image')) {

@@ -86,7 +86,6 @@ class ItemFactory extends Factory
 
         return array_merge($selected, [
             'brand_name' => $this->faker->optional()->company,
-            'status' => $this->faker->randomElement([1, 2]),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

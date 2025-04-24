@@ -12,10 +12,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
             $table->foreignId('buyer_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
+            $table->integer('status')->default(0);
             $table->string('shipping_postal_code');
             $table->string('shipping_address');
             $table->string('shipping_building');
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
