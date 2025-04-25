@@ -9,6 +9,13 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'order_id',
+        'reviewer_id',
+        'reviewed_user_id',
+        'rating',
+    ];
+
     public function order()
     {
         return $this->belongsTo(Order::class);

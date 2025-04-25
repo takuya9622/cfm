@@ -7,12 +7,17 @@ html body main {
     height: 100%;
 }
 
-.error {
-    color: #ff0000;
+.error,
+.message {
+    color: #FF0000;
     white-space: nowrap;
     font-weight: bold;
     font-size: 15px;
     margin: 0;
+}
+
+.message {
+    color: #199000;
 }
 
 .header {

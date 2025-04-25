@@ -15,7 +15,19 @@ class ChatController extends Controller
     public function show($orderId)
     {
         $currentOrder = Order::findOrFail($orderId);
+        $this->authorize('view', $currentOrder);
+        $reviewSubmitted = $currentOrder->reviews()
+            ->where('reviewer_id', auth()->id())
+            ->exists();
+        if ($reviewSubmitted === true) {
+            return redirect()->route('items.index')
+                ->with('message', 'すでにレビューを投稿済みです');
+        }
+
         $item = Item::findOrFail($currentOrder->item_id);
+        $reviewReceived = $currentOrder->reviews()
+            ->where('reviewed_user_id', auth()->id())
+            ->exists();
 
         $user = auth()->user();
         $otherUser = $currentOrder->buyer_id === $user->id ? $currentOrder->seller : $currentOrder->buyer;
@@ -41,23 +53,22 @@ class ChatController extends Controller
             ->orderBy('chats_max_updated_at', 'desc')
             ->get();
 
-        return view('dealing_chat', compact('currentOrder', 'item', 'otherUser', 'messages', 'otherOrders'));
+        return view('dealing_chat', compact('currentOrder', 'item', 'reviewSubmitted', 'reviewReceived', 'otherUser', 'messages', 'otherOrders'));
     }
 
     public function store(ChatStoreRequest $request)
     {
-
-        if ($request->filled('message')) {
+        if ($request->filled('send.message')) {
             $chat = new Chat();
             $chat->fill([
                 'order_id' => $request->route('orderId'),
                 'user_id' => auth()->id(),
                 'is_read' => Chat::STATUS_UNREAD,
-                'message' => $request->input('message'),
+                'message' => $request->input('send.message'),
             ]);
 
-            if ($request->hasFile('image')) {
-                $chat->image = $request->file('image')->store('chats', 'public');
+            if ($request->hasFile('send.image')) {
+                $chat->image = $request->file('send.image')->store('chats', 'public');
             }
 
             $chat->save();
@@ -72,7 +83,7 @@ class ChatController extends Controller
 
         $chat->fill([
             'is_read' => Chat::STATUS_UNREAD,
-            'message' => $request->input('message'),
+            'message' => $request->input('edit.message'),
         ]);
         $chat->save();
 

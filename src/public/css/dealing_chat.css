@@ -1,3 +1,25 @@
+.error {
+    font-size: 20px;
+}
+
+.rating-error {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.edit-error {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.send-error {
+    margin-left: 30px;
+    margin-bottom: 5px;
+    padding: 0;
+    list-style: none;
+}
+
 .dealing-chat-container {
     display: flex;
     flex-direction: row;
@@ -74,21 +96,97 @@
     display: inline-flex;
     width: 172px;
     height: 54px;
-    padding: 0px 5px;
     margin-left: auto;
     border-radius: 30px;
+    border: none;
     background: #FF8282;
     justify-content: center;
     align-items: center;
     color: #FFFFFF;
     font-size: 20px;
-    text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s;
     }
 
 .complete-deal:hover {
     background-color: #FF5555;
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    background: #FDFCE6;
+    border-radius: 10px;
+    width: 600px;
+    height: 370px;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid #000000;
+}
+
+.headline-section h2 {
+    font-size: 35px;
+    font-weight: normal;
+}
+
+.rating-section {
+    width: 100%;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #000000;
+}
+
+.headline-section h2,
+.rating-section .subtitle {
+    margin: 15px;
+    text-align: left;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #868686;
+    margin-bottom: 10px;
+}
+
+.stars span {
+    font-size: 100px;
+    color: #D9D9D9;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.stars span.active {
+    color: #FFF048;
+}
+
+.action-section {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.submit-button {
+    background: #FF8282;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: normal;
+    cursor: pointer;
 }
 
 .item-info-container {
@@ -249,16 +347,6 @@
 
 .chat-input-container {
     margin-top: 15px;
-}
-
-.error {
-    margin-left: 30px;
-    margin-bottom: 5px;
-    padding: 0;
-}
-
-.error li {
-    list-style: none;
 }
 
 .chat-form {

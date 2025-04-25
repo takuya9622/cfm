@@ -5,7 +5,9 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Chat;
+use App\Models\Order;
 use App\Policies\ChatPolicy;
+use App\Policies\OrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Chat::class => ChatPolicy::class,
+        Order::class => OrderPolicy::class,
     ];
 
     /**

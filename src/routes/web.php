@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 
@@ -24,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/chat/{orderId}', [ChatController::class, 'store'])->name('chat.store');
     Route::put('/chat/{chat}', [ChatController::class, 'update'])->name('chat.update');
     Route::delete('/chat/{chat}', [ChatController::class, 'destroy'])->name('chat.destroy');
+    Route::post('/review/{order}', [ReviewController::class, 'store'])->name('review.store');
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
     Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
     Route::get('/mypage', [UserController::class, 'index'])->name('profile.index');

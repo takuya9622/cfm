@@ -17,9 +17,36 @@
         <section class="chat-header">
             <img class="user-image" src="{{ asset('storage/' . $otherUser->profile_image) }}" alt="{{ $otherUser->name }}">
             <h1 class="chat-header-title">{{ $otherUser->name }}さんとの取引画面</h1>
-            @if ($currentOrder->buyer_id === auth()->user()->id)
-            <a class="complete-deal" href="#">取引を完了する</a>
+            @error('rating')
+            <div class="error rating-error">{{ $message }}</div>
+            @enderror
+            @if ($currentOrder->buyer_id === auth()->user()->id &&
+            $reviewSubmitted === false ||
+            $reviewReceived === true)
+            <button class="complete-deal" id="openReviewModal">取引を完了する</button>
             @endif
+            <form id="reviewModal" class="modal" action="{{ route('review.store', $currentOrder->id) }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <section class="headline-section">
+                        <h2>取引が完了しました。</h2>
+                    </section>
+                    <section class="rating-section">
+                        <p class="subtitle">今回の取引相手はどうでしたか？</p>
+                        <input type="hidden" name="rating" id="ratingInput">
+                        <div class="stars">
+                            <span data-value="1">★</span>
+                            <span data-value="2">★</span>
+                            <span data-value="3">★</span>
+                            <span data-value="4">★</span>
+                            <span data-value="5">★</span>
+                        </div>
+                    </section>
+                    <section class="action-section">
+                        <button class="submit-button">送信する</button>
+                    </section>
+                </div>
+            </form>
         </section>
 
         <section class="item-info-container">
@@ -30,6 +57,9 @@
             </div>
         </section>
 
+        @error('edit.message')
+            <div class="error edit-error">{{ $message }}</div>
+        @enderror
         <section class="chat-messages-container">
             @foreach ($messages as $message)
             <div class="chat-message {{ $message->user_id === auth()->id() ? 'outgoing' : 'incoming' }}">
@@ -46,7 +76,8 @@
                 <form class="edit-form hidden" id="edit-form-{{ $message->id }}" method="POST" action="{{ route('chat.update', $message->id) }}">
                     @csrf
                     @method('PUT')
-                    <textarea class="edit-area auto-resize" name="message">{{ $message->message }}</textarea>
+                    <textarea class="edit-area auto-resize" name="edit[message]">
+                        {{ old('edit.message', $message->message) }}</textarea>
                 </form>
                 <div class="chat-actions">
                     <div class="left-actions">
@@ -71,17 +102,31 @@
         </section>
 
         <section class="chat-input-container">
-            @if ($errors->any())
-                <ul class="error">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+            @php
+                $sendErrors = collect($errors->getMessages())
+                    ->filter(function ($value, $key) {
+                        return str_starts_with($key, 'send.');
+                    });
+            @endphp
+            @if ($sendErrors->isNotEmpty())
+                <ul class="error send-error">
+                    @foreach ($sendErrors as $field => $messages)
+                        @foreach ($messages as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
                     @endforeach
                 </ul>
             @endif
+
             <form class="chat-form" action="{{ route('chat.store', ['orderId' => $currentOrder->id]) }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
-                <textarea class="textarea auto-resize" name="message" id="message" placeholder="取引メッセージを記入してください" autocomplete="off"></textarea>
-                <input type="file" name="image" id="upload-image">
+                <textarea
+                    class="textarea auto-resize"
+                    name="send[message]"
+                    id="message"
+                    placeholder="取引メッセージを記入してください"
+                    autocomplete="off">{{ old('send.message') }}</textarea>
+                <input type="file" name="send[image]" id="upload-image">
                 <label class="upload-image-button" for="upload-image">画像を選択</label>
                 <button class="chat-sending-button" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -93,4 +138,5 @@
     </div>
 </div>
 <script src="{{ asset('js/dealing_chat.js') }}"></script>
+<script src="{{ asset('js/review.js') }}"></script>
 @endsection

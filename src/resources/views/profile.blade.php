@@ -12,7 +12,16 @@
         <div class="profile-image">
             <img src="{{ asset(auth()->check() && auth()->user()->profile_image ? 'storage/' . auth()->user()->profile_image : 'storage/users/default.png') }}" alt="プロフィール画像">
         </div>
-        <h1>{{ auth()->check() ? auth()->user()->name : 'ゲスト' }}</h1>
+        <div>
+            <h1>{{ auth()->check() ? auth()->user()->name : 'ゲスト' }}</h1>
+            @if ($averageRating > 0)
+            <div class="rating-stars">
+                @for ($i = 1; $i <= 5; $i++)
+                    <span class="star {{ $i <= $averageRating ? 'filled' : '' }}">★</span>
+                @endfor
+            </div>
+            @endif
+        </div>
     </div>
     <div>
         <a href="{{ route('profile.edit') }}" class="edit-profile-button">プロフィールを編集</a>

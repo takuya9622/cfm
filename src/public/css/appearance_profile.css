@@ -15,6 +15,18 @@
     object-fit: cover;
 }
 
+.rating-stars {
+    font-size: 40px
+}
+
+.star {
+    color: #D9D9D9;
+}
+
+.star.filled {
+    color: #FFF048;
+}
+
 .edit-profile-button {
     color: #ff0000;
     border: 2px solid #ff0000;

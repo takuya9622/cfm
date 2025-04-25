@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Order;
+use App\Models\Review;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -34,6 +35,7 @@ class UserController extends Controller
                 $query->whereIn('id', function ($subQuery) {
                     $subQuery->select('item_id')
                         ->from('orders')
+                        ->where('status', Order::STATUS_DEALING)
                         ->where(function ($q) {
                             $q->where('buyer_id', auth()->id())
                                 ->orWhere('seller_id', auth()->id());
@@ -46,7 +48,7 @@ class UserController extends Controller
                 $query->where('is_read', false);
         }])->get();
 
-        $unreadCount = Order::where('status', 0)
+        $unreadCount = Order::where('status', Order::STATUS_DEALING)
             ->where(function ($q) {
                 $q->where('buyer_id', auth()->id())
                     ->orWhere('seller_id', auth()->id());
@@ -58,7 +60,11 @@ class UserController extends Controller
             ->get()
             ->sum(fn($order) => $order->chats->count());
 
-        return view('profile', compact('items', 'tab', 'unreadCount'));
+        $averageRating = round(
+            Review::where('reviewed_user_id', auth()->id())->avg('rating')
+        );
+
+        return view('profile', compact('items', 'tab', 'unreadCount', 'averageRating'));
     }
 
     public function editProfile() {

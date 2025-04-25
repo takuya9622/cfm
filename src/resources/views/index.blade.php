@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+@if (session('message'))
+<div class="message">
+    {{ session('message') }}
+</div>
+@endif
 <nav class="items-tab">
     <ul class="tabs">
         <li class="{{ $tab === 'recommend' ? 'active-tab' : '' }}">

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ChatStoreRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         $orderId = $this->route('orderId');
         $order = Order::find($orderId);
@@ -19,20 +19,20 @@ class ChatStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => ['required', 'string', 'max:400'],
-            'image' => ['image', 'mimes:jpeg,png', 'max:2048'],
+            'send.message' => ['required', 'string', 'max:400'],
+            'send.image' => ['image', 'mimes:jpeg,png', 'max:2048'],
         ];
     }
 
     public function messages()
     {
         return [
-            'message.required' => '本文を入力してください',
-            'message.string' => '本文は文字列で入力してください',
-            'message.max' => '本文は400文字以内で入力してください',
-            'image.image' => '「.png」または「.jpeg」形式でアップロードしてください',
-            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
-            'image.max' => '画像のサイズは2MB以下にしてください',
+            'send.message.required' => '本文を入力してください',
+            'send.message.string' => '本文は文字列で入力してください',
+            'send.message.max' => '本文は400文字以内で入力してください',
+            'send.image.image' => '「.png」または「.jpeg」形式でアップロードしてください',
+            'send.image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+            'send.image.max' => '画像のサイズは2MB以下にしてください',
         ];
     }
 }

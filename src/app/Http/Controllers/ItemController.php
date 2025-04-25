@@ -83,6 +83,6 @@ class ItemController extends Controller
         }
 
 
-        return redirect()->route('items.index');
+        return redirect()->route('items.index')->with('message', '出品が完了しました');
     }
 }
