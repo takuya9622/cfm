@@ -28,7 +28,7 @@
 6. [主なコマンド一覧](#主なコマンド一覧)
 7. [ER図](#ER図)
 
-<br />
+</br>
 
 ## プロジェクト概要
 
@@ -66,7 +66,7 @@
 | リリースについて     | 4ヶ月後を予定                            |
 | セキュリティについて | アプリケーション内に限り考慮する          |
 | SEOについて          | 考慮しない                                |
-| コード品質について   | [コーディング規約]を参照してコーディングを行うこと<br>その他の要件については、[開発プロセス]を参照 |
+| コード品質について   | [コーディング規約]を参照してコーディングを行うこと</br>その他の要件については、[開発プロセス]を参照 |
 
 #### デザイン要件
 - UIデザインについて: [画面設計]を参照
@@ -177,13 +177,13 @@ php artisan key:generate
 
 以下の7つのテーブルに対応するファイルがsrc/database/migrationsにある事を確認
 
-1.users<br />
-2.items<br />
-3.categories<br />
-4.category_item<br />
-5.orders<br />
-6.likes<br />
-7.comments<br />
+1.users</br>
+2.items</br>
+3.categories</br>
+4.category_item</br>
+5.orders</br>
+6.likes</br>
+7.comments</br>
 
 確認出来たら以下のコマンドでマイグレーションを実行
 
@@ -203,23 +203,47 @@ php artisan migrate:fresh
 php artisan db:seed
 ```
 
+#### 作成されるダミーデータは以下の通り
+
+- ダミーユーザー用パスワード：password
+- 合計 3 名のユーザーと 10 件の商品が生成されます
+- 出品者ごとの割り当ては以下の通り：
+
+| 出品者       | 商品ID         | 出品数 |
+|--------------|----------------|--------|
+| testUser1    | 1〜5            | 5件    |
+| testUser2    | 6〜10           | 5件    |
+| testUser3    | 出品なし        | 0件    |
+
+> ※ 商品の状態(売却済・出品中)はランダムまたはSeederで制御されています
+
+</br>
 うまく行かない場合は以下のコマンドを実行後に再度マイグレーション
 
 ```
 composer dump-autoload
 ```
 
+### シンボリックリンクを作成
+
+画像データにアクセスするために以下のコマンドを実行
+```
+php artisan storage:link
+```
+
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## URL
 
-・開発環境 : http://localhost<br />
-・phpMyAdmin : http://localhost:8080<br />
-・MailHog : http://localhost:8025<br />
+・開発環境 : http://localhost</br>
+・phpMyAdmin : http://localhost:8080</br>
+・MailHog : http://localhost:8025</br>
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## 機能テスト
+
+> ※今回のチャット機能に関するテストはありません。
 
 以下を参考に.env.testingを作成
 ```
@@ -271,14 +295,14 @@ php artisan test tests/Feature
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
 ## ER図
-![alt](er.png)
+![alt](er.svg)
 
 <p align="right">(<a href="#top">トップへ</a>)</p>
 
-[機能要件]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=1909938334#gid=1909938334
+[機能要件]:https://docs.google.com/spreadsheets/d/1AFiW_FhK4WJRihzImjOC8EX3l_x-bAOl7pME1whRZEk/edit?gid=2036764863#gid=2036764863
 
-[コーディング規約]:https://estra-inc.notion.site/1263a94a2aab4e3ab81bad77db1cf186?pvs=4
+[コーディング規約]:https://estra-inc.notion.site/1263a94a2aab4e3ab81bad77db1cf186
 
-[開発プロセス]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=950806051#gid=950806051
+[開発プロセス]:https://docs.google.com/spreadsheets/d/1AFiW_FhK4WJRihzImjOC8EX3l_x-bAOl7pME1whRZEk/edit?gid=1215707669#gid=1215707669
 
-[画面設計]:https://docs.google.com/spreadsheets/d/1rCHlX8H-m6UZ3iZc6OLw6XRcdeuMLzopn9qCuwUv8bQ/edit?gid=1998718085#gid=1998718085
+[画面設計]:https://www.figma.com/design/73p1YzUjZX254iYWutLQrD/Pro%E5%85%A5%E4%BC%9A%E3%83%86%E3%82%B9%E3%83%88_%E3%83%95%E3%83%AA%E3%83%9E%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&p=f&t=Pd3WezKA92MvgkRp-0
