@@ -9,7 +9,7 @@
     <div class="sidebar">
         <p class="sidebar-title">その他の取引</p>
         @foreach ($otherOrders as $order)
-        <a class="other-deal" href="{{ route('chat.show', $order->id) }}">{{ $order->item->title }}</a>
+        <a class="other-deal adjustable-text" href="{{ route('chat.show', $order->id) }}">{{ $order->item->title }}</a>
         @endforeach
     </div>
 
@@ -76,8 +76,7 @@
                 <form class="edit-form hidden" id="edit-form-{{ $message->id }}" method="POST" action="{{ route('chat.update', $message->id) }}">
                     @csrf
                     @method('PUT')
-                    <textarea class="edit-area auto-resize" name="edit[message]">
-                        {{ old('edit.message', $message->message) }}</textarea>
+                    <textarea class="edit-area auto-resize" name="edit[message]">{{ old('edit.message', $message->message) }}</textarea>
                 </form>
                 <div class="chat-actions">
                     <div class="left-actions">

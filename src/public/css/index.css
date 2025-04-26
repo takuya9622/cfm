@@ -63,6 +63,10 @@
     position: relative;
 }
 
+.item a {
+    text-decoration: none;
+}
+
 .item img {
     width: 100%;
     height: 100%;
@@ -75,7 +79,6 @@
     margin: 0 auto;
     font-size: 25px;
     font-weight: bold;
-    text-decoration: none;
 }
 
 .item-name {

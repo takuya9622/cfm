@@ -44,19 +44,29 @@
 }
 
 .other-deal {
-    width: 75%;
     display: flex;
+    width: 75%;
+    min-height: 42px;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     gap: 10px;
     padding: 3px 10px;
     border-radius: 5px;
     background: #EEEFEB;
     color: #000000;
-    font-size: 24px;
     text-decoration: none;
-    justify-content: center;
-    align-items: center;
+    overflow: hidden;
+}
+
+.adjustable-text {
+    font-size: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .chat-container {
@@ -403,4 +413,125 @@
     border: none;
     color: #000000;
     cursor: pointer;
+}
+
+@media (max-width:850px) {
+
+    .error {
+        font-size: 13px;
+    }
+
+    .sidebar {
+        gap: 25px;
+    }
+
+    .sidebar-title {
+        font-size: 16px;
+    }
+
+    .other-deal {
+        gap: 10px;
+        min-height: 24px;
+        font-size: 0.8em;
+    }
+
+    .chat-header {
+        gap: 15px;
+        padding: 5px 25px;
+    }
+
+    .user-image {
+        width: 60px;
+        height: auto;
+    }
+
+    .chat-header-title {
+        font-size: 20px;
+    }
+
+    .complete-deal {
+        width: 140px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .item-image {
+        width: 130px;
+        height: auto;
+        margin: 10px 0;
+        margin-left: 15px;
+    }
+
+    .item-info {
+        gap: 15px;
+    }
+
+    .item-title {
+        font-size: 35px;
+    }
+
+    .item-price {
+        font-size: 25px;
+    }
+
+    .chat-messages-container {
+        max-height: 300px;
+    }
+
+    .chat-message {
+        font-size: 15px;
+    }
+
+    .chat-user {
+        gap: 10px;
+    }
+
+    .in-chat {
+        width: 45px;
+        height: auto;
+    }
+
+    .chat-message .chat-text,
+    .chat-message .edit-form {
+        min-height: 40px;
+    }
+
+    .edit-area {
+        font-size: 15px;
+    }
+
+    .right-actions {
+        gap: 5px;
+    }
+
+    .chat-message .chat-image {
+        max-width: 100px;
+        max-height: auto;
+    }
+
+    .chat-input-container {
+        margin-bottom: 5px;
+    }
+
+    .chat-form {
+        align-items: center;
+    }
+
+    .textarea {
+        max-width: 70%;
+        padding: 5px;
+        font-size: 15px;
+        min-height: 20px;
+    }
+
+    .upload-image-button {
+        height: 30px;
+        padding: 5px 10px;
+        font-size: 15px;
+    }
+
+    .chat-sending-button {
+        width: 30px;
+        height: auto;
+    }
 }

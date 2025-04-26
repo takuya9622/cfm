@@ -1,20 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const textElements = document.querySelectorAll('.adjustable-text');
+    const maxLength = 6;
 
-    const modal = document.querySelector('.modal');
-    const openBtn = document.getElementById('openReviewModal');
-    const body = document.querySelector('body');
+    function adjustFontSize() {
+        const windowWidth = window.innerWidth;
+        const isMobile = windowWidth <= 850;
 
-    openBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        body.style.overflow = 'hidden';
-    });
+        textElements.forEach(textElement => {
+            const length = textElement.textContent.length;
+            let fontSize;
 
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            body.style.overflow = 'auto';
-        }
-    });
+            if (isMobile) {
+                fontSize = length > maxLength ? '0.4em' : '0.8em';
+            } else {
+                fontSize = length > maxLength ? '0.8em' : '1.5em';
+            }
+
+            textElement.style.fontSize = fontSize;
+        });
+    }
+
+    adjustFontSize();
+    window.addEventListener('resize', adjustFontSize);
 });
 
 window.addEventListener('DOMContentLoaded', () => {
