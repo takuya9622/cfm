@@ -87,7 +87,7 @@ class ChatController extends Controller
         ]);
         $chat->save();
 
-        return back()->with('status', 'チャットを更新しました');
+        return back();
     }
 
     public function destroy(Chat $chat)
@@ -100,6 +100,6 @@ class ChatController extends Controller
 
         $chat->delete();
 
-        return back()->with('status', 'チャットを削除しました');
+        return back();
     }
 }

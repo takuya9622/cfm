@@ -23,11 +23,13 @@ class Item extends Model
         'updated_at',
     ];
 
-    public function seller() {
+    public function seller()
+    {
         return $this->belongsTo(User::class, 'seller_id');
     }
 
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsToMany(Category::class, 'category_item');
     }
 
@@ -44,7 +46,8 @@ class Item extends Model
         return self::SALES_STATUSES[$this->status] ?? '不明';
     }
 
-    public function getConditionLabelAttribute() {
+    public function getConditionLabelAttribute()
+    {
         $conditionLabels = [
             1 => '良好',
             2 => '目立った傷や汚れなし',
@@ -55,22 +58,38 @@ class Item extends Model
         return $conditionLabels[$this->condition] ?? '不明';
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 
-    public function isLikedBy($user) {
+    public function isLikedBy($user)
+    {
         if (!$user) {
             return false;
         }
         return $this->likes()->where('user_id', $user->id)->exists();
     }
 
-    public function likes() {
+    public function likes()
+    {
         return $this->belongsToMany(User::class, 'likes', 'item_id', 'user_id');
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
+    }
+
+    public function order_chats()
+    {
+        return $this->hasManyThrough(
+            Chat::class,
+            Order::class,
+            'item_id',
+            'order_id',
+            'id',
+            'id'
+        );
     }
 }

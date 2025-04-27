@@ -46,7 +46,11 @@ class UserController extends Controller
         $items = $query->with([
             'orders.chats' => function ($query) {
                 $query->where('is_read', false);
-        }])->get();
+            }
+        ])
+        ->withMax('order_chats', 'updated_at')
+        ->orderBy('order_chats_max_updated_at', 'desc')
+        ->get();
 
         $unreadCount = Order::where('status', Order::STATUS_DEALING)
             ->where(function ($q) {
